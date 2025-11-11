@@ -21,14 +21,14 @@ typedef struct{
 	int mes;
 	int ano;
 	int dia;
-}data;
+}nascimento;
 
 typedef struct {
 	string nome;
 	string email;
 	local endereco;
 	contato telefone;
-	data aniversario;
+	nascimento aniversario;
 	string observacao;
 } cadastro;
 
@@ -76,7 +76,7 @@ void cadastrarPessoa(cadastro agenda[], int &quantidade) {
 //    cin >> agenda[quantidade].telefone.fone;
 //    cin.ignore();
 //
-    cout << "\n--- Data de Aniversario ---\n";
+    cout << "\n--- nascimento de Aniversario ---\n";
     cout << "Dia: ";
     cin >> agenda[quantidade].aniversario.dia;
     cout << "Mes: ";
@@ -117,7 +117,7 @@ void buscarNome(cadastro agenda[], int tamanho, string nome){
             cout << "\n--- Telefone ---\n";
             cout << "(" << agenda[i].telefone.DDD << ") " << agenda[i].telefone.fone << endl;
 
-            cout << "\n--- Data de Aniversario ---\n";
+            cout << "\n--- nascimento de Aniversario ---\n";
             cout << agenda[i].aniversario.dia << "/"
                  << agenda[i].aniversario.mes << "/"
                  << agenda[i].aniversario.ano << endl;
@@ -161,14 +161,14 @@ void removerCadastro(cadastro agenda[], int &quantidade, string nome, string ema
     }
 }
 
-void ordenar(cadastro agenda[], quantidade){
+void ordenar(cadastro agenda[], int quantidade){
 	cadastro temp;
     for (int i = 0; i < quantidade - 1; i++) {
         for (int j = i + 1; j < quantidade; j++) {
             if (agenda[i].nome > agenda[j].nome) {
                 temp = agenda[i];
                 agenda[i] = agenda[j];
-                agenda[j] = temp;-
+                agenda[j] = temp;
             }
         }
     }
@@ -202,11 +202,12 @@ int main(){
 		switch(instrucao){
 			case 1:
 				system("cls");
-				if (quantidade < TAMANHO)
+				if (quantidade < TAMANHO){
 				cadastrarPessoa(agenda, quantidade);
-				ordenar(agenda, quantidade)	
-				else
-    			cout << "Agenda cheia!\n";
+				ordenar(agenda, quantidade);
+				}else {
+					cout << "Agenda cheia!\n";
+				}
 				break;
 				
 			case 2:
@@ -244,14 +245,14 @@ int main(){
 					cout << "Nenhum usuario cadastrado \n\n";
 				}else{
 					system("cls");
-					cout << "Digite o nome do usuario que deseja retirar: "
+					cout << "Digite o nome do usuario que deseja retirar: ";
 					cin.ignore();
 					getline(cin, nome);
-					cout << "Digite o e-mail do usuario que deseja retirar: "
+					cout << "Digite o e-mail do usuario que deseja retirar: ";
 					cin.ignore();
 					getline(cin, email);
-					removerCadastro(agenta, quantidade, nome, email)
-				}
+					removerCadastro(agenda, quantidade, nome, email);
+				};
 				
 			}
 				
